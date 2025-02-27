@@ -1,0 +1,15 @@
+.body {
+    background-image: url(tải\ xuống.jfif);
+    position: relative;
+    
+}
+#first {
+    font-size: 60px;
+    text-align: center;
+    color: red;
+    position: relative;
+}
+.second {
+    font-style: normal;
+    color: blue;
+}

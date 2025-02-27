@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Đăng Ký</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .container:hover {
+            transform: scale(1.02);
+        }
+        
+        input {
+            width: calc(100% - 30px);
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding-left: 30px;
+            background-repeat: no-repeat;
+            background-position: 8px center;
+            background-size: 16px;
+        }
+        
+        .input-icon {
+            background-image: url('https://cdn-icons-png.flaticon.com/512/747/747376.png');
+        }
+        
+        .email-icon {
+            background-image: url('https://cdn-icons-png.flaticon.com/512/732/732200.png');
+        }
+        
+        .phone-icon {
+            background-image: url('https://cdn-icons-png.flaticon.com/512/724/724664.png');
+        }
+        
+        .password-icon {
+            background-image: url('https://cdn-icons-png.flaticon.com/512/3064/3064155.png');
+        }
+        
+        .password-wrapper {
+            position: relative;
+        }
+        
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+        
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background: #218838;
+        }
+        
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Đăng Ký 📝</h2>
+        <form id="registerForm">
+            <input type="text" id="fullname" class="input-icon" placeholder="Họ và Tên" required>
+            <input type="email" id="email" class="email-icon" placeholder="Email" required>
+            <input type="text" id="phone" class="phone-icon" placeholder="Số điện thoại" required>
+            <div class="password-wrapper">
+                <input type="password" id="password" class="password-icon" placeholder="Mật khẩu" required>
+                <span class="toggle-password" onclick="togglePassword('password')">👁️</span>
+            </div>
+            <div class="password-wrapper">
+                <input type="password" id="confirmPassword" class="password-icon" placeholder="Nhập lại mật khẩu" required>
+                <span class="toggle-password" onclick="togglePassword('confirmPassword')">👁️</span>
+            </div>
+            <p id="errorMessage" class="error"></p>
+            <button type="submit">Đăng Ký ✅</button>
+        </form>
+    </div>
+
+    <script>
+        function togglePassword(id) {
+            let input = document.getElementById(id);
+            if (input.type === "password") {
+                input.type = "text";
+            } else {
+                input.type = "password";
+            }
+        }
+
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let fullname = document.getElementById("fullname").value;
+            let email = document.getElementById("email").value;
+            let phone = document.getElementById("phone").value;
+            let password = document.getElementById("password").value;
+            let confirmPassword = document.getElementById("confirmPassword").value;
+            let errorMessage = document.getElementById("errorMessage");
+            errorMessage.textContent = "";
+
+            if (!/^[A-Za-zÀ-Ỹà-ỹ\s]+$/.test(fullname)) {
+                errorMessage.textContent = "Tên không hợp lệ!";
+                return;
+            }
+
+            if (!/^\d{10,11}$/.test(phone)) {
+                errorMessage.textContent = "Số điện thoại không hợp lệ!";
+                return;
+            }
+            if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+                errorMessage.textContent = "Email không hợp lệ!";
+                return;
+            }
+            if (password.length < 6) {
+                errorMessage.textContent = "Mật khẩu phải có ít nhất 6 ký tự!";
+                return;
+            }
+            if (password !== confirmPassword) {
+                errorMessage.textContent = "Mật khẩu nhập lại không khớp!";
+                return;
+            }
+            alert("Đăng ký thành công! 🎉");
+            window.location.href = "home.html";
+        });
+    </script>
+</body>
+
+</html>

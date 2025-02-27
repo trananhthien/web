@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liên Hệ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+        
+        textarea,
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        button:hover {
+            background: #0056b3;
+        }
+        
+        #successMessage {
+            color: green;
+            display: none;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2><i class="fas fa-phone"></i> Liên Hệ 📞</h2>
+        <form id="contactForm">
+            <input type="text" id="name" placeholder=" Họ và Tên" required>
+            <input type="email" id="email" placeholder=" Email" required>
+            <input type="text" id="phone" placeholder=" Số điện thoại" required>
+            <textarea id="message" placeholder=" Nội dung liên hệ" rows="4" required></textarea>
+            <button type="submit"><i class="fas fa-paper-plane"></i> Gửi Liên Hệ ✅</button>
+        </form>
+        <p id="successMessage"><i class="fas fa-check-circle"></i> Cảm ơn bạn đã liên hệ! 🎉</p>
+    </div>
+
+    <script>
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const message = document.getElementById("message").value.trim();
+
+            if (!name || !email || !phone || !message) {
+                alert("Vui lòng điền đầy đủ thông tin!");
+                return;
+            }
+
+            const contact = { name, email, phone, message };
+            localStorage.setItem("contact", JSON.stringify(contact));
+
+            document.getElementById("successMessage").style.display = "block";
+            setTimeout(() => {
+                window.location.href = "home.html";
+            }, 2000);
+        });
+    </script>
+</body>
+
+</html>
